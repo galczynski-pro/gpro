@@ -1,0 +1,114 @@
+[
+  {
+    "plik": ".dependency-cruiser.js",
+    "opis": "Konfiguracja Dependency Cruiser – wizualizacja i analiza zależności między modułami.",
+    "rada": "Aktualizuj ścieżki przy refaktorze katalogów. Używaj do wykrywania circular dependencies.",
+    "praktyczny_przyklad": "dependency-cruise src --output-type dot > project-structure.dot",
+    "kod_konfiguracji": "module.exports = {\n  forbidden: [{\n    name: 'no-circular',\n    comment: 'Zakaz cyklicznych zależności',\n    severity: 'error',\n    from: {},\n    to: { circular: true }\n  }]\n};"
+  },
+  {
+    "plik": ".htaccess",
+    "opis": "Konfiguracja Apache – routing, zabezpieczenia, nagłówki HTTP.",
+    "rada": "Wymuszaj HTTPS, blokuj dostęp do katalogów z kodem źródłowym.",
+    "praktyczny_przyklad": "# Wymusz HTTPS\nRewriteEngine On\nRewriteCond %{HTTPS} off\nRewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]\n\n# Blokuj dostęp do wrażliwych katalogów\n<Files ~ \"\\.(inc|conf|class)\\.php$\">\n    Require all denied\n</Files>\n\n# Cache statycznych plików\n<IfModule mod_expires.c>\n    ExpiresActive On\n    ExpiresByType text/css \"access plus 1 month\"\n    ExpiresByType application/javascript \"access plus 1 month\"\n</IfModule>",
+    "bezpieczenstwo": "Dodaj nagłówki CSP i HSTS dla produkcji"
+  },
+  {
+    "plik": "composer.json",
+    "opis": "Deklaracja zależności PHP (Composer).",
+    "rada": "Używaj semver constraints, dokumentuj wymagania w require-dev.",
+    "praktyczny_przyklad": "{\n  \"require\": {\n    \"phpmailer/phpmailer\": \"^6.6\",\n    \"stripe/stripe-php\": \"^7.0\"\n  },\n  \"require-dev\": {\n    \"phpunit/phpunit\": \"^9.0\"\n  },\n  \"autoload\": {\n    \"psr-4\": {\n      \"App\\\\\": \"src/\"\n    }\n  }\n}",
+    "komendy": "composer install --no-dev (produkcja), composer update (update paczek)"
+  },
+  {
+    "plik": "composer.lock",
+    "opis": "Blokada wersji bibliotek - zagwarantuje identyczne wersje na wszystkich środowiskach.",
+    "rada": "Zawsze commituj do repozytorium. Nigdy nie edytuj ręcznie.",
+    "praktyczny_przyklad": "git add composer.lock && git commit -m 'Update dependencies'",
+    "troubleshooting": "Jeśli konflikt: usuń composer.lock i uruchom composer install"
+  },
+  {
+    "plik": "favicon.ico",
+    "opis": "Ikona strony wyświetlana w przeglądarce.",
+    "rada": "Przygotuj multiple rozmiary dla różnych urządzeń.",
+    "praktyczny_przyklad": "<!-- W header.php -->\n<link rel=\"icon\" type=\"image/x-icon\" href=\"/favicon.ico\">\n<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/img/favicon-32x32.png\">\n<link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/img/apple-touch-icon.png\">",
+    "narzedzia": "Użyj favicon.io do generowania wszystkich formatów"
+  },
+  {
+    "plik": "index.php",
+    "opis": "Główny punkt wejścia aplikacji - inicjalizuje system i obsługuje routing.",
+    "rada": "Trzymaj minimalną logikę - tylko bootstrap i routing do odpowiednich modułów.",
+    "praktyczny_przyklad": "<?php\n// Inicjalizacja\nrequire_once __DIR__ . '/inc/includes.php';\n\n// Routing\n$request_uri = $_SERVER['REQUEST_URI'];\n$path = parse_url($request_uri, PHP_URL_PATH);\n\nswitch ($path) {\n    case '/chat':\n        include '_chat.php';\n        break;\n    case '/blog':\n        include '_blog.php';\n        break;\n    default:\n        include '_404.php';\n        break;\n}",
+    "struktura": "includes → routing → view → output"
+  },
+  {
+    "plik": "info.php",
+    "opis": "Wyświetla phpinfo() - informacje o konfiguracji PHP.",
+    "rada": "NIGDY nie zostawiaj na produkcji - ujawnia wrażliwe dane serwera.",
+    "praktyczny_przyklad": "<?php\nif (!defined('DEVELOPMENT') || !DEVELOPMENT) {\n    http_response_code(404);\n    exit('Not found');\n}\nphpinfo();",
+    "bezpieczenstwo": "Zabezpiecz warunkiem środowiska lub IP"
+  },
+  {
+    "plik": "paypal-webhook.php",
+    "opis": "Endpoint dla webhooków PayPal - obsługuje powiadomienia o płatnościach.",
+    "rada": "Waliduj podpisy, loguj wszystkie eventy, obsługuj idempotency.",
+    "praktyczny_przyklad": "<?php\nrequire_once 'inc/includes.php';\n\n$body = file_get_contents('php://input');\n$headers = getallheaders();\n\n// Loguj każde wywołanie\nfile_put_contents('logs/paypal_' . date('Y-m-d') . '.log', \n    date('Y-m-d H:i:s') . ' - ' . $body . PHP_EOL, FILE_APPEND);\n\n// Weryfikuj webhook\nif (!verifyPayPalWebhook($body, $headers)) {\n    http_response_code(400);\n    exit('Invalid signature');\n}\n\n$event = json_decode($body, true);\n\nswitch ($event['event_type']) {\n    case 'PAYMENT.COMPLETED':\n        processPaymentCompleted($event);\n        break;\n    case 'PAYMENT.FAILED':\n        processPaymentFailed($event);\n        break;\n}\n\nhttp_response_code(200);\necho 'OK';",
+    "debug": "Zawsze zwracaj HTTP 200 gdy event poprawnie obsłużony"
+  },
+  {
+    "plik": "stripe-webhook.php",
+    "opis": "Endpoint dla webhooków Stripe - obsługuje eventy płatności.",
+    "rada": "Używaj constructEvent() do weryfikacji, implementuj idempotency key.",
+    "praktyczny_przyklad": "<?php\nrequire_once 'vendor/autoload.php';\nrequire_once 'inc/includes.php';\n\n\\Stripe\\Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);\n\n$payload = @file_get_contents('php://input');\n$sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];\n$endpoint_secret = $_ENV['STRIPE_WEBHOOK_SECRET'];\n\ntry {\n    $event = \\Stripe\\Webhook::constructEvent(\n        $payload, $sig_header, $endpoint_secret\n    );\n} catch(Exception $e) {\n    http_response_code(400);\n    exit('Webhook error: ' . $e->getMessage());\n}\n\n// Idempotency check\nif (isDuplicateEvent($event['id'])) {\n    http_response_code(200);\n    exit('Already processed');\n}\n\nswitch ($event['type']) {\n    case 'payment_intent.succeeded':\n        handlePaymentSuccess($event['data']['object']);\n        break;\n    case 'payment_intent.payment_failed':\n        handlePaymentFailed($event['data']['object']);\n        break;\n}\n\nmarkEventProcessed($event['id']);\nhttp_response_code(200);",
+    "testowanie": "Użyj Stripe CLI: stripe listen --forward-to localhost/stripe-webhook.php"
+  },
+  {
+    "plik": "project-structure.dot",
+    "opis": "Plik Graphviz do generowania diagramu struktury projektu.",
+    "rada": "Aktualizuj przy większych zmianach architektury.",
+    "praktyczny_przyklad": "digraph ProjectStructure {\n    rankdir=TB;\n    node [shape=box];\n    \n    \"index.php\" -> \"inc/includes.php\";\n    \"inc/includes.php\" -> \"admin/class/\";\n    \"_chat.php\" -> \"modules/action/\";\n    \"modules/action/\" -> \"php/api.php\";\n}",
+    "generowanie": "dot -Tpng project-structure.dot -o structure.png"
+  },
+  {
+    "plik": "project-structure.txt",
+    "opis": "Tekstowa reprezentacja struktury katalogów projektu.",
+    "rada": "Używaj w dokumentacji i pull requestach do pokazania zmian.",
+    "praktyczny_przyklad": ".\n├── admin/\n│   ├── class/\n│   ├── inc/\n│   └── js/\n├── inc/\n│   ├── header.php\n│   └── footer.php\n├── modules/\n└── vendor/",
+    "generowanie": "tree -I 'node_modules|vendor' > project-structure.txt"
+  },
+  {
+    "plik": "_404.php",
+    "opis": "Strona błędu 404 - wyświetlana gdy zasób nie został znaleziony.",
+    "rada": "Dodaj linki do głównych sekcji, utrzymuj spójny design.",
+    "praktyczny_przyklad": "<?php\nheader('HTTP/1.0 404 Not Found');\n$page_title = 'Strona nie znaleziona';\ninclude 'inc/header.php';\n?>\n<div class=\"error-page\">\n    <h1>404 - Strona nie znaleziona</h1>\n    <p>Szukana strona nie istnieje.</p>\n    <nav>\n        <a href=\"/\">Strona główna</a>\n        <a href=\"/blog\">Blog</a>\n        <a href=\"/chat\">Chat AI</a>\n    </nav>\n</div>\n<?php include 'inc/footer.php'; ?>",
+    "seo": "Zwracaj kod 404, ale nie przekierowuj - szkodzi SEO"
+  },
+  {
+    "plik": "_maintenance.php",
+    "opis": "Strona trybu konserwacji - informuje o czasowej niedostępności serwisu.",
+    "rada": "Zwracaj kod HTTP 503 z nagłówkiem Retry-After.",
+    "praktyczny_przyklad": "<?php\nheader('HTTP/1.1 503 Service Unavailable');\nheader('Retry-After: 3600'); // 1 godzina\nheader('Content-Type: text/html; charset=utf-8');\n?>\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Serwis w konserwacji</title>\n    <meta name=\"robots\" content=\"noindex\">\n</head>\n<body>\n    <div class=\"maintenance\">\n        <h1>Serwis w trakcie prac konserwacyjnych</h1>\n        <p>Przewidywany czas powrotu: <?= date('H:i', time() + 3600) ?></p>\n        <p>Przepraszamy za niedogodności.</p>\n    </div>\n</body>\n</html>",
+    "aktywacja": "Utwórz plik .maintenance w root - sprawdzaj w index.php"
+  },
+  {
+    "plik": "_blog.php",
+    "opis": "Strona główna bloga - wyświetla listę artykułów z paginacją.",
+    "rada": "Implementuj paginację, cache'uj zapytania, dodaj filtry po kategorii.",
+    "praktyczny_przyklad": "<?php\nrequire_once 'inc/includes.php';\n\n$page = (int)($_GET['page'] ?? 1);\n$posts_per_page = 10;\n$offset = ($page - 1) * $posts_per_page;\n\n$posts = new Posts();\n$blog_posts = $posts->getPublishedPosts($posts_per_page, $offset);\n$total_posts = $posts->countPublishedPosts();\n$total_pages = ceil($total_posts / $posts_per_page);\n\n$page_title = 'Blog - Artykuły o AI';\ninclude 'inc/header.php';\n?>\n<main class=\"blog-list\">\n    <?php foreach ($blog_posts as $post): ?>\n        <article class=\"blog-preview\">\n            <h2><a href=\"/blog/<?= $post['slug'] ?>\"><?= htmlspecialchars($post['title']) ?></a></h2>\n            <p><?= substr(strip_tags($post['content']), 0, 200) ?>...</p>\n            <time><?= date('d.m.Y', strtotime($post['created_at'])) ?></time>\n        </article>\n    <?php endforeach; ?>\n    \n    <?php if ($total_pages > 1): ?>\n        <nav class=\"pagination\">\n            <?php for ($i = 1; $i <= $total_pages; $i++): ?>\n                <a href=\"?page=<?= $i ?>\" <?= $i === $page ? 'class=\"active\"' : '' ?>><?= $i ?></a>\n            <?php endfor; ?>\n        </nav>\n    <?php endif; ?>\n</main>\n<?php include 'inc/footer.php'; ?>",
+    "optymalizacja": "Dodaj indeksy na kolumny status i created_at"
+  },
+  {
+    "plik": "_blog-post.php",
+    "opis": "Wyświetlenie pojedynczego wpisu blogowego.",
+    "rada": "Używaj slug zamiast ID w URL dla lepszego SEO.",
+    "praktyczny_przyklad": "<?php\nrequire_once 'inc/includes.php';\n\n$slug = $_GET['slug'] ?? '';\nif (empty($slug)) {\n    header('Location: /blog');\n    exit;\n}\n\n$posts = new Posts();\n$post = $posts->getPostBySlug($slug);\n\nif (!$post) {\n    include '_404.php';\n    exit;\n}\n\n$page_title = $post['title'];\n$meta_description = substr(strip_tags($post['content']), 0, 160);\ninclude 'inc/header.php';\n?>\n<article class=\"blog-post\">\n    <header>\n        <h1><?= htmlspecialchars($post['title']) ?></h1>\n        <time datetime=\"<?= $post['created_at'] ?>\">\n            <?= date('d F Y', strtotime($post['created_at'])) ?>\n        </time>\n    </header>\n    <div class=\"content\">\n        <?= $post['content'] ?>\n    </div>\n    <footer>\n        <?php if ($post['tags']): ?>\n            <div class=\"tags\">\n                <?php foreach (explode(',', $post['tags']) as $tag): ?>\n                    <a href=\"/blog/tag/<?= trim($tag) ?>\" class=\"tag\"><?= trim($tag) ?></a>\n                <?php endforeach; ?>\n            </div>\n        <?php endif; ?>\n    </footer>\n</article>\n<?php include 'inc/footer.php'; ?>",
+    "seo": "Dodaj structured data (JSON-LD) dla lepszej widoczności"
+  },
+  {
+    "plik": "_chat.php",
+    "opis": "Interfejs czatu z AI - główny moduł interakcji użytkownika.",
+    "rada": "Implementuj Server-Sent Events dla real-time odpowiedzi.",
+    "praktyczny_przyklad": "<?php\nrequire_once 'inc/includes.php';\n\n// Sprawdź czy użytkownik ma kredyty\nif (isset($_SESSION['customer_id'])) {\n    $customer = new Customers();\n    $credits = $customer->getCredits($_SESSION['customer_id']);\n} else {\n    $credits = 0;\n}\n\n$page_title = 'Chat AI';\n$additional_css = ['/style/chat.css'];\n$page_scripts = ['/js/sse.js', '/js/RecordRTC.js'];\ninclude 'inc/header.php';\n?>\n<div class=\"chat-container\">\n    <div class=\"chat-header\">\n        <h1>AI Assistant</h1>\n        <div class=\"credits\">Kredyty: <span id=\"credit-count\"><?= $credits ?></span></div>\n    </div>\n    \n    <div id=\"chat-messages\" class=\"chat-messages\"></div>\n    \n    <form id=\"chat-form\" class=\"chat-input\">\n        <textarea id=\"message-input\" placeholder=\"Napisz wiadomość...\"></textarea>\n        <button type=\"submit\" id=\"send-btn\">\n            <img src=\"/img/icon-send.svg\" alt=\"Wyślij\">\n        </button>\n    </form>\n</div>\n\n<script>\nconst chatForm = document.getElementById('chat-form');\nconst messageInput = document.getElementById('message-input');\nconst chatMessages = document.getElementById('chat-messages');\n\nchatForm.addEventListener('submit', function(e) {\n    e.preventDefault();\n    const message = messageInput.value.trim();\n    if (!message) return;\n    \n    // Wyślij wiadomość przez AJAX\n    sendMessage(message);\n    messageInput.value = '';\n});\n\nfunction sendMessage(message) {\n    // Dodaj wiadomość użytkownika\n    addMessage(message, 'user');\n    \n    // Rozpocznij SSE stream dla odpowiedzi AI\n    const eventSource = new EventSource('/php/api.php?action=chat&message=' + encodeURIComponent(message));\n    \n    eventSource.onmessage = function(e) {\n        const data = JSON.parse(e.data);\n        if (data.type === 'token') {\n            appendToLastMessage(data.content);\n        } else if (data.type === 'done') {\n            eventSource.close();\n        }\n    };\n}\n</script>\n<?php include 'inc/footer.php'; ?>",
+    "funkcjonalnosci": "Dodaj upload plików, nagrywanie voice, history czatu"
+  }
+]

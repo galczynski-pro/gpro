@@ -1,0 +1,13 @@
+[
+  { "katalog": "/js", "plik": "main.js", "opis": "Główny plik JS frontendu – obsługa UI, AJAX, walidacje formularzy." },
+  { "katalog": "/js", "plik": "confetti.js", "opis": "Generowanie efektów konfetti przy akcjach użytkownika." },
+  { "katalog": "/js", "plik": "highlight.min.js", "opis": "Podświetlanie składni kodu na stronach (syntax highlighting)." },
+  { "katalog": "/js", "plik": "purify.min.js", "opis": "Sanityzacja danych wejściowych – zabezpieczenie przed XSS." },
+  { "katalog": "/js", "plik": "RecordRTC.js", "opis": "Nagrywanie audio/wideo w czasie rzeczywistym." },
+  { "katalog": "/js", "plik": "sharer.min.js", "opis": "Udostępnianie treści w mediach społecznościowych." },
+  { "katalog": "/js", "plik": "sse.js", "opis": "Obsługa Server-Sent Events – komunikacja w czasie rzeczywistym." },
+  { "katalog": "/js", "plik": "sweetalert2.all.min.js", "opis": "Okna dialogowe i alerty w UI." },
+  { "katalog": "/js", "plik": "swiper-bundle.min.js", "opis": "Slider/galeria obrazów i treści." },
+  { "katalog": "/js", "plik": "toastr.min.js", "opis": "Wyświetlanie powiadomień toast." },
+  { "katalog": "/js", "plik": "vfs_fonts.js", "opis": "Czcionki dla generowanych plików PDF (np. TCPDF)." }
+]

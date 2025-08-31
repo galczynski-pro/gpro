@@ -1,0 +1,11 @@
+[
+  { "katalog": "/php", "plik": "api.php", "opis": "Centralny backend API – obsługa żądań z frontendu i panelu admina." },
+  { "katalog": "/php", "plik": "clear-session.php", "opis": "Czyści nieaktywne lub wygasłe sesje użytkowników." },
+  { "katalog": "/php", "plik": "dall-e.php", "opis": "Integracja z API OpenAI DALL·E – generowanie obrazów." },
+  { "katalog": "/php", "plik": "dall-e-2.php", "opis": "Alternatywna/rozszerzona integracja z DALL·E (nowsza wersja API)." },
+  { "katalog": "/php", "plik": "google_tts.php", "opis": "Integracja z Google Text-to-Speech – zamiana tekstu na mowę." },
+  { "katalog": "/php", "plik": "index.php", "opis": "Wejściowy plik backendu – inicjalizacja konfiguracji." },
+  { "katalog": "/php", "plik": "json.php", "opis": "Dostarczanie danych JSON do frontendu." },
+  { "katalog": "/php", "plik": "key.php", "opis": "Obsługa kluczy API i autoryzacji dostępu do usług." },
+  { "katalog": "/php", "plik": "whisper.php", "opis": "Integracja z OpenAI Whisper – rozpoznawanie mowy." }
+]

@@ -1,0 +1,15 @@
+[
+  { "katalog": "/vendor", "plik": "autoload.php", "opis": "Autoloader Composer – ładuje wszystkie biblioteki z /vendor." },
+  { "katalog": "/vendor/composer", "plik": "[pakiety]", "opis": "Pliki pomocnicze Composer do zarządzania zależnościami i autoloadingiem." },
+
+  { "katalog": "/vendor/phpmailer", "plik": "[biblioteka]", "opis": "PHPMailer – wysyłanie e-maili przez SMTP i inne protokoły." },
+  { "katalog": "/vendor/stripe", "plik": "[biblioteka]", "opis": "Stripe SDK – obsługa płatności online." },
+  { "katalog": "/vendor/tecnickcom/tcpdf", "plik": "[biblioteka]", "opis": "TCPDF – generowanie PDF-ów w locie." },
+  { "katalog": "/vendor/phpoffice/phpword", "plik": "[biblioteka]", "opis": "PHPWord – tworzenie i edycja dokumentów Word (DOCX)." },
+  { "katalog": "/vendor/laminas", "plik": "[biblioteka]", "opis": "Framework Laminas – narzędzia i klasy do obsługi HTTP, requestów, filtrów." },
+
+  { "katalog": "/vendor", "plik": "composer.json", "opis": "Definicja zainstalowanych bibliotek (Composer)." },
+  { "katalog": "/vendor", "plik": "composer.lock", "opis": "Zamrożone wersje bibliotek (Composer)." },
+  { "katalog": "/vendor", "plik": "installed.json", "opis": "Lista zainstalowanych paczek i wersji." },
+  { "katalog": "/vendor", "plik": "LICENSE", "opis": "Licencje wszystkich bibliotek użytych w projekcie." }
+]

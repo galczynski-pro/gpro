@@ -1,0 +1,15 @@
+[
+  { "katalog": "/style", "plik": "app.css", "opis": "Globalne style frontendowe (layout, typografia, kolory)." },
+  { "katalog": "/style", "plik": "bootstrap.min.css", "opis": "Bootstrap – responsywne komponenty UI." },
+  { "katalog": "/style", "plik": "dark-mode.css", "opis": "Stylizacja trybu ciemnego." },
+  { "katalog": "/style", "plik": "highlight.min.css", "opis": "Podświetlanie składni kodu." },
+  { "katalog": "/style", "plik": "maintenance.css", "opis": "Wygląd strony trybu konserwacji." },
+  { "katalog": "/style", "plik": "toastr.min.css", "opis": "Style dla powiadomień Toastr." },
+  { "katalog": "/style", "plik": "dataTables.bootstrap5.min.css", "opis": "Style tabel DataTables z Bootstrap 5." },
+
+  { "katalog": "/admin/style", "plik": "app.css", "opis": "Style interfejsu panelu admina." },
+  { "katalog": "/admin/style", "plik": "bootstrap.min.css", "opis": "Bootstrap CSS w panelu admina." },
+  { "katalog": "/admin/style", "plik": "login.css", "opis": "Wygląd strony logowania admina." },
+  { "katalog": "/admin/style", "plik": "toastr.min.css", "opis": "Stylizacja powiadomień Toastr w panelu." },
+  { "katalog": "/admin/style", "plik": "dataTables.bootstrap5.min.css", "opis": "Style dla tabel DataTables w panelu admina." }
+]

@@ -1,0 +1,37 @@
+[
+  { "katalog": "Root", "plik": "index.php", "opis": "Start aplikacji – inicjalizacja i routing główny." },
+  { "katalog": "Root", "plik": ".htaccess", "opis": "Konfiguracja Apache (przekierowania, bezpieczeństwo, cache)." },
+  { "katalog": "Root", "plik": "composer.json", "opis": "Lista zależności PHP zarządzanych przez Composer." },
+  { "katalog": "Root", "plik": "composer.lock", "opis": "Blokada wersji zależności w celu spójnych wdrożeń." },
+  { "katalog": "Root", "plik": "favicon.ico", "opis": "Ikona strony wyświetlana w przeglądarce." },
+  { "katalog": "Root", "plik": "info.php", "opis": "Wyświetla konfigurację PHP (debug, środowisko)." },
+  
+  { "katalog": "Root", "plik": "paypal-webhook.php", "opis": "Obsługa webhooków PayPal (płatności)." },
+  { "katalog": "Root", "plik": "stripe-webhook.php", "opis": "Obsługa webhooków Stripe (płatności)." },
+  
+  { "katalog": "Root", "plik": "_404.php", "opis": "Strona błędu 404." },
+  { "katalog": "Root", "plik": "_maintenance.php", "opis": "Strona trybu konserwacji." },
+  { "katalog": "Root", "plik": "_blog.php", "opis": "Główna strona bloga." },
+  { "katalog": "Root", "plik": "_blog-post.php", "opis": "Obsługa pojedynczego posta." },
+  { "katalog": "Root", "plik": "_blog-tag.php", "opis": "Obsługa tagów w blogu." },
+  { "katalog": "Root", "plik": "_chat.php", "opis": "Moduł czatu z AI." },
+  { "katalog": "Root", "plik": "_pricing.php", "opis": "Wyświetlanie planów cenowych." },
+  { "katalog": "Root", "plik": "_sitemap.php", "opis": "Generowanie mapy strony (SEO)." },
+  { "katalog": "Root", "plik": "_pages.php", "opis": "Obsługa stron statycznych." },
+  { "katalog": "Root", "plik": "_share.php", "opis": "Funkcje udostępniania treści." },
+  { "katalog": "Root", "plik": "_ai-team.php", "opis": "Strona zespołu AI/botów." },
+  { "katalog": "Root", "plik": "_ai-team-category.php", "opis": "Kategorie zespołu AI." },
+
+  { "katalog": "/inc", "plik": "includes.php", "opis": "Ładuje autoloader, konfiguracje i sesje." },
+  { "katalog": "/inc", "plik": "header.php", "opis": "Generuje nagłówek strony (meta, menu, CSS)." },
+  { "katalog": "/inc", "plik": "footer.php", "opis": "Generuje stopkę strony (JS, copyright, zamknięcia)." },
+  { "katalog": "/inc", "plik": "restrict.php", "opis": "Kontrola dostępu i autoryzacja użytkowników." },
+  
+  { "katalog": "/inc", "plik": "sRGB.icc", "opis": "Profil kolorów sRGB do przetwarzania obrazów." },
+  { "katalog": "/inc", "plik": "tcpdf_colors.php", "opis": "Definicje kolorów dla TCPDF (generowanie PDF)." },
+  { "katalog": "/inc", "plik": "tcpdf_filters.php", "opis": "Filtry do kompresji i przetwarzania PDF." },
+  { "katalog": "/inc", "plik": "tcpdf_fonts.php", "opis": "Definicje czcionek dla dokumentów PDF." },
+  { "katalog": "/inc", "plik": "datamatrix.php", "opis": "Generowanie kodów DataMatrix." },
+  { "katalog": "/inc", "plik": "pdf417.php", "opis": "Generowanie kodów PDF417." },
+  { "katalog": "/inc", "plik": "qrcode.php", "opis": "Generowanie kodów QR." }
+]

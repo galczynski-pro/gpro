@@ -1,0 +1,17 @@
+[
+  { "katalog": "/modules/action", "plik": "_action.php", "opis": "Obsługa akcji użytkownika (wysyłanie promptów, interakcje)." },
+  { "katalog": "/modules/action", "plik": "_new-chat.php", "opis": "Inicjowanie nowej sesji czatu użytkownika." },
+
+  { "katalog": "/modules/customer", "plik": "chat-session.php", "opis": "Zarządzanie sesjami czatu klienta (start/stop)." },
+  { "katalog": "/modules/customer", "plik": "_customer-sign-in.php", "opis": "Formularz logowania użytkownika." },
+  { "katalog": "/modules/customer", "plik": "_customer-sign-up.php", "opis": "Formularz rejestracji nowego użytkownika." },
+  { "katalog": "/modules/customer", "plik": "customer-get-credits.php", "opis": "Pobieranie ilości kredytów klienta." },
+  { "katalog": "/modules/customer", "plik": "customer-restrict.php", "opis": "Sprawdza ograniczenia użytkownika (np. brak kredytów)." },
+  { "katalog": "/modules/customer", "plik": "customer-stop-chat.php", "opis": "Zamykanie aktywnej sesji czatu klienta." },
+
+  { "katalog": "/modules/payment/recharge-credits", "plik": "_process-payment.php", "opis": "Obsługa płatności za pakiety kredytów (Stripe/PayPal/etc.)." },
+
+  { "katalog": "/modules/dalle", "plik": "_new-chat.php", "opis": "Komunikacja z API DALL·E – generowanie obrazów na podstawie promptów." },
+
+  { "katalog": "/modules/vision", "plik": "_new-chat.php", "opis": "Analiza obrazów przez API (np. Whisper/vision AI)." }
+]

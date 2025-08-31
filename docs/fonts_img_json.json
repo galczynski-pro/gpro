@@ -1,0 +1,25 @@
+[
+  { "katalog": "/fonts", "plik": "Roboto-Regular.ttf", "opis": "Czcionka Roboto – normalna grubość (tekst główny)." },
+  { "katalog": "/fonts", "plik": "Roboto-Bold.ttf", "opis": "Czcionka Roboto – wersja pogrubiona (nagłówki, akcenty)." },
+  { "katalog": "/fonts", "plik": "Roboto-Italic.ttf", "opis": "Czcionka Roboto – wersja kursywa (wyróżnienia, cytaty)." },
+  { "katalog": "/fonts", "plik": "Roboto-Medium.ttf", "opis": "Czcionka Roboto – średnia grubość (pomiędzy normal a bold)." },
+  { "katalog": "/fonts", "plik": "Roboto-MediumItalic.ttf", "opis": "Czcionka Roboto – średnia kursywa (styl akcentowy)." },
+  { "katalog": "/fonts", "plik": "Roboto.js", "opis": "Skrypt do ładowania czcionki Roboto dynamicznie w aplikacji." },
+
+  { "katalog": "/img", "plik": "icon-send.svg", "opis": "Ikona 'wyślij' używana w przyciskach formularzy." },
+  { "katalog": "/img", "plik": "placeholder.svg", "opis": "Obraz zastępczy, wyświetlany gdy brak grafiki." },
+  { "katalog": "/img", "plik": "404.svg", "opis": "Grafika strony błędu 404." },
+  { "katalog": "/img", "plik": "chat-pattern.png", "opis": "Tło/pattern używany w module czatu." },
+  { "katalog": "/img", "plik": "chat.png", "opis": "Ikona graficzna czatu." },
+  { "katalog": "/img", "plik": "btn_stop.svg", "opis": "Ikona zatrzymania (np. zakończenie sesji czatu)." },
+  { "katalog": "/img", "plik": "card-style.jpg", "opis": "Tło/obrazek stylu kart w panelu admina." },
+  { "katalog": "/img", "plik": "icons.svg", "opis": "Zestaw ikon SVG dla interfejsu." },
+  { "katalog": "/img", "plik": "login.jpg", "opis": "Tło formularza logowania w adminie." },
+  { "katalog": "/img", "plik": "no-image.svg", "opis": "Obraz zastępczy 'brak zdjęcia'." },
+  { "katalog": "/img", "plik": "placeholder-256.jpg", "opis": "Obraz zastępczy w wyższej rozdzielczości." },
+  { "katalog": "/img", "plik": "placeholder.jpg", "opis": "Standardowy placeholder dla grafik." },
+
+  { "katalog": "/img/header_assets_template", "plik": "logo.svg", "opis": "Logo projektu (wersja wektorowa SVG)." },
+  { "katalog": "/img/header_assets_template", "plik": "banner.jpg", "opis": "Obraz nagłówkowy (np. hero section)." },
+  { "katalog": "/img/header_assets_template", "plik": "background.png", "opis": "Tło dla nagłówka lub modułu." }
+]
