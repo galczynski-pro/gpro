@@ -2,10 +2,17 @@
 $use_bootstrap_icons = true;
 // Include necessary files
 require_once(__DIR__ . '/inc/includes.php');
+
+// If user is not logged in, show the simple landing page only
+if (!$isLogged) {
+    require_once(__DIR__ . '/_landing.php');
+    exit;
+}
+
 define('META_TITLE', $seoConfig['home_meta_title']);
 define('META_DESCRIPTION', $seoConfig['home_meta_description']);
 require_once(__DIR__ . '/inc/header.php');
-// Set the prompts list
+// Set the prompts list for logged-in users
 $getPrompts = $prompts->getListFront();
 // Flag to determine if bootstrap icons should be used
 $use_bootstrap_icons = true;

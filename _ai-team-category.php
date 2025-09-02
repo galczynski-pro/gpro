@@ -3,6 +3,12 @@ $header_min = true;
 $loadAI = false;
 $use_bootstrap_icons = true;
 require_once("inc/includes.php");
+
+// Redirect guests to landing
+if (!$isLogged) {
+  header("Location: /");
+  exit;
+}
 if(isset($_REQUEST['slug']) && $_REQUEST['slug']){
   $slug = addslashes($_REQUEST['slug']);
   $getCategory = $categories->getBySlug($slug);

@@ -3,6 +3,13 @@ $header_min = false;
 $loadAI = false;
 $use_bootstrap_icons = true;
 require_once("inc/includes.php");
+
+// Redirect guests to landing
+if (!$isLogged) {
+  header("Location: /");
+  exit;
+}
+
 define('META_TITLE', $seoConfig['ai_team_meta_title']);
 define('META_DESCRIPTION', $seoConfig['ai_team_meta_description']);
 require_once("inc/header.php");
