@@ -77,12 +77,42 @@ $getMenuName = $menus->get(2);
 
           <div class="col-lg-3 col-md-4">
             <div class="card-ai <?php echo isset($theme_skin['ai_card_style']) ? $theme_skin['ai_card_style'] : ''; ?> d-grid">
-              <?php showVipCard($showPrompts->id); ?> 
-              <div class="card-ai-image"><a href="<?php echo $base_url; ?>/chat/<?php echo $showPrompts->slug; ?>"><img loading="lazy"  src="<?php echo $base_url; ?>/public_uploads/<?php echo $showPrompts->image; ?>" onerror="this.src='<?php echo $base_url; ?>/img/no-image.svg'" alt="<?php echo $showPrompts->name; ?>" title="<?php echo $showPrompts->name; ?>"></a></div>
-              <div class="card-ai-bottom">
-                <div class="card-ai-name"><h3><?php echo $showPrompts->name; ?></h3></div>
-                <div class="card-ai-job"><span><?php echo $showPrompts->expert; ?></span></div>
-                <a href="<?php echo $base_url; ?>/chat/<?php echo $showPrompts->slug; ?>"><span class="btn btn-primary btn-md start-chat"><i class="bi bi-chat"></i> <?php echo $lang['chat_now']; ?></span></a>
+              <div class="card-flip">
+                <div class="card-flip-inner">
+                  <!-- Front -->
+                  <div class="card-face card-front">
+                    <?php showVipCard($showPrompts->id); ?> 
+                    <div class="card-ai-image">
+                      <button class="btn btn-light btn-sm btn-card-info" title="<?php echo $lang['more_info'] ?? 'Info'; ?>" data-flip><i class="bi bi-info-circle"></i></button>
+                      <a href="<?php echo $base_url; ?>/chat/<?php echo $showPrompts->slug; ?>">
+                        <img loading="lazy"  src="<?php echo $base_url; ?>/public_uploads/<?php echo $showPrompts->image; ?>" onerror="this.src='<?php echo $base_url; ?>/img/no-image.svg'" alt="<?php echo $showPrompts->name; ?>" title="<?php echo $showPrompts->name; ?>">
+                      </a>
+                    </div>
+                    <div class="card-ai-bottom">
+                      <div class="card-ai-name"><h3><?php echo $showPrompts->name; ?></h3></div>
+                      <div class="card-ai-job"><span><?php echo $showPrompts->expert; ?></span></div>
+                      <a href="<?php echo $base_url; ?>/chat/<?php echo $showPrompts->slug; ?>"><span class="btn btn-primary btn-md start-chat"><i class="bi bi-chat"></i> <?php echo $lang['chat_now']; ?></span></a>
+                    </div>
+                  </div>
+
+                  <!-- Back -->
+                  <div class="card-face card-back">
+                    <div class="card-back-body">
+                      <h4 class="mb-1"><?php echo $showPrompts->name; ?></h4>
+                      <div class="text-muted mb-2"><?php echo $showPrompts->expert; ?></div>
+                      <?php if (!empty($showPrompts->description) && (!isset($showPrompts->display_description) || $showPrompts->display_description)) { ?>
+                        <div class="small pre-line"><?php echo truncateText(strip_tags($showPrompts->description), 180); ?></div>
+                      <?php } ?>
+                      <?php if (isset($showPrompts->display_API_MODEL) && $showPrompts->display_API_MODEL && !empty($showPrompts->API_MODEL)) { ?>
+                        <span class="badge bg-success mt-2"><?php echo $showPrompts->API_MODEL; ?></span>
+                      <?php } ?>
+                    </div>
+                    <div class="card-back-actions">
+                      <a href="<?php echo $base_url; ?>/chat/<?php echo $showPrompts->slug; ?>" class="btn btn-primary btn-sm"><i class="bi bi-chat"></i> <?php echo $lang['chat_now']; ?></a>
+                      <button class="btn btn-outline-light btn-sm" data-unflip><i class="bi bi-arrow-counterclockwise"></i> <?php echo $lang['back'] ?? 'Powrót'; ?></button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -58,7 +58,46 @@ async function fetchLanguageData() {
         } catch (error) {
             console.log("Error fetchLanguageData");
         }
+}
+
+// Card flip interaction (AI cards)
+document.addEventListener('click', function(e){
+    var flipBtn = e.target.closest && e.target.closest('[data-flip]');
+    if (flipBtn) {
+        var card = flipBtn.closest('.card-flip');
+        if (card) card.classList.add('is-flipped');
+        e.preventDefault();
+        return;
     }
+    var unflipBtn = e.target.closest && e.target.closest('[data-unflip]');
+    if (unflipBtn) {
+        var card2 = unflipBtn.closest('.card-flip');
+        if (card2) card2.classList.remove('is-flipped');
+        e.preventDefault();
+        return;
+    }
+});
+
+// Ensure flip containers have consistent heights
+function setFlipHeights(){
+    var cards = document.querySelectorAll('.card-flip');
+    cards.forEach(function(card){
+        var inner = card.querySelector('.card-flip-inner');
+        var front = card.querySelector('.card-front');
+        if (inner && front) {
+            var h = front.offsetHeight;
+            inner.style.height = h + 'px';
+            card.style.height = h + 'px';
+        }
+    });
+}
+
+window.addEventListener('load', setFlipHeights);
+window.addEventListener('resize', function(){
+    // Debounce
+    clearTimeout(window.__flipTimer);
+    window.__flipTimer = setTimeout(setFlipHeights, 150);
+});
 }
 
 // Função para buscar os dados da IA
