@@ -51,7 +51,7 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-md-start">
-          <a href="<?php echo $base_url; ?>/"><img src="<?php echo $base_url; ?>/public_uploads/<?php echo $getTheme->image_logo; ?>" alt="<?php echo $lang['company_name']; ?>" title="<?php echo $lang['company_name']; ?>" id="logo"></a>
+          <a href="<?php echo $isLogged ? $base_url.'/ai-team' : $base_url.'/'; ?>"><img src="<?php echo $base_url; ?>/public_uploads/<?php echo $getTheme->image_logo; ?>" alt="<?php echo $lang['company_name']; ?>" title="<?php echo $lang['company_name']; ?>" id="logo"></a>
         </div>
         <div class="col-lg-9 col-md-9 col-6 d-flex justify-content-end">
 

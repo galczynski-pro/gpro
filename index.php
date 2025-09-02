@@ -3,6 +3,12 @@ $use_bootstrap_icons = true;
 // Include necessary files
 require_once(__DIR__ . '/inc/includes.php');
 
+// Logged-in users should not see the frontpage; send them to AI list
+if ($isLogged) {
+    header("Location: /ai-team");
+    exit;
+}
+
 // If user is not logged in, show the simple landing page only
 if (!$isLogged) {
     require_once(__DIR__ . '/_landing.php');
