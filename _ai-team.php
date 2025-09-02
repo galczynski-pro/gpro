@@ -13,7 +13,18 @@ if (!$isLogged) {
 define('META_TITLE', $seoConfig['ai_team_meta_title']);
 define('META_DESCRIPTION', $seoConfig['ai_team_meta_description']);
 require_once("inc/header.php");
-$getPrompts = $prompts->getListFront();
+
+// Read filters (A-Z and search)
+$alpha = isset($_GET['alpha']) ? strtoupper(substr($_GET['alpha'], 0, 1)) : '';
+if (!preg_match('/^[A-Z]$/', $alpha)) { $alpha = ''; }
+$q = isset($_GET['q']) ? trim($_GET['q']) : '';
+
+// Fetch prompts based on filters (no category narrowing in this view)
+if ($alpha || $q) {
+  $getPrompts = $prompts->searchFront($q, $alpha);
+} else {
+  $getPrompts = $prompts->getListFront();
+}
 $getCategories = $categories->getListFront();
 $getMenuName = $menus->get(2);
 ?>
@@ -40,6 +51,28 @@ $getMenuName = $menus->get(2);
     </div>
   </div>  
 </section>
+
+  <!-- Search and Alphabet Filters -->
+  <section class="pt-3">
+    <div class="container">
+      <form method="get" action="<?php echo $base_url; ?>/ai-team" class="row g-2 align-items-center">
+        <div class="col-md-6">
+          <input type="text" name="q" value="<?php echo htmlspecialchars($q); ?>" class="form-control" placeholder="<?php echo $lang['search'] ?? 'Szukaj botów...'; ?>">
+        </div>
+        <div class="col-md-3">
+          <div class="d-flex flex-wrap gap-1">
+            <a class="btn btn-sm <?php echo ($alpha==''? 'btn-dark' : 'btn-outline-dark'); ?>" href="<?php echo $base_url; ?>/ai-team<?php echo $q? ('?q='.urlencode($q)) : ''; ?>">All</a>
+            <?php foreach (range('A','Z') as $L) { $href = $base_url.'/ai-team?alpha='.$L.($q? ('&q='.urlencode($q)) : ''); ?>
+              <a class="btn btn-sm <?php echo ($alpha==$L? 'btn-primary' : 'btn-outline-primary'); ?>" href="<?php echo $href; ?>"><?php echo $L; ?></a>
+            <?php } ?>
+          </div>
+        </div>
+        <div class="col-md-3 text-md-end">
+          <button type="submit" class="btn btn-secondary"><i class="bi bi-search"></i> <?php echo $lang['search_btn'] ?? 'Szukaj'; ?></button>
+        </div>
+      </form>
+    </div>
+  </section>
 
   <section>
     <div class="container section-spacing">
