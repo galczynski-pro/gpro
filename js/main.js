@@ -58,6 +58,7 @@ async function fetchLanguageData() {
         } catch (error) {
             console.log("Error fetchLanguageData");
         }
+        }
 }
 
 // Card flip interaction (AI cards)
@@ -98,7 +99,6 @@ window.addEventListener('resize', function(){
     clearTimeout(window.__flipTimer);
     window.__flipTimer = setTimeout(setFlipHeights, 150);
 });
-}
 
 // Função para buscar os dados da IA
 async function fetchLoadData(AI_ID) {
