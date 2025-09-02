@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iFairy.ai - Your Magical Digital Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a1a;
+            color: #e0e0ff;
+        }
+        .font-heading {
+            font-family: 'Playfair Display', serif;
+        }
+        .glass-effect {
+            background: rgba(16, 16, 32, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(120, 81, 229, 0.5), 0 0 30px rgba(120, 81, 229, 0.3);
+        }
+        .glow-effect-subtle {
+            box-shadow: 0 0 8px rgba(120, 81, 229, 0.3);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #a777e3, #6c56f2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(171, 137, 255, 0.6);
+            opacity: 0;
+            animation: float 15s infinite linear;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(5vw); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="relative overflow-x-hidden">
+
+    <!-- Particle Background -->
+    <div id="particle-container" class="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden"></div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold font-heading text-white">iFairy.ai</a>
+            <div class="hidden md:flex space-x-6 text-sm items-center">
+                <a href="#introduction" class="hover:text-purple-300 transition duration-300">Introduction</a>
+                <a href="#features" class="hover:text-purple-300 transition duration-300">Features</a>
+                <a href="#technology" class="hover:text-purple-300 transition duration-300">Technology</a>
+                <a href="#creator-system" class="hover:text-purple-300 transition duration-300">Creator System</a>
+                <a href="/sign-in" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 glow-effect-subtle">Meet Your iFairy</a>
+            </div>
+             <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4 space-y-2">
+            <a href="#introduction" class="block hover:text-purple-300 transition duration-300">Introduction</a>
+            <a href="#features" class="block hover:text-purple-300 transition duration-300">Features</a>
+            <a href="#technology" class="block hover:text-purple-300 transition duration-300">Technology</a>
+            <a href="#creator-system" class="block hover:text-purple-300 transition duration-300">Creator System</a>
+            <a href="/sign-in" class="block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 glow-effect-subtle w-full text-center">Meet Your iFairy</a>
+            <a href="/sign-up" class="block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 glow-effect-subtle w-full text-center">Create iFairy</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center px-4 relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#0a0a1a] z-0"></div>
+            <div class="relative z-10 max-w-4xl mx-auto">
+                 <div class="flex justify-center items-center mb-8">
+                     <svg class="w-32 h-32 text-purple-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="wingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#a777e3;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#6c56f2;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="url(#wingGradient)" fill-opacity="0.2"/>
+                        <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" fill="url(#wingGradient)" fill-opacity="0.4"/>
+                        <path d="M14.5 9.5c.83 0 1.5-.67 1.5-1.5S15.33 6.5 14.5 6.5 13 7.17 13 8s.67 1.5 1.5 1.5zm-5 0c.83 0 1.5-.67 1.5-1.5S10.33 6.5 9.5 6.5 8 7.17 8 8s.67 1.5 1.5 1.5zm0 5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm5 0c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" fill="url(#wingGradient)"/>
+                    </svg>
+                 </div>
+                <h1 class="text-5xl md:text-7xl font-bold font-heading text-white leading-tight">Welcome to iFairy.ai</h1>
+                <p class="text-xl md:text-2xl mt-4 text-purple-200">Where technology meets magic, and your imagination takes flight.</p>
+                <p class="mt-8 max-w-2xl mx-auto text-gray-300">Discover your personal digital storyteller, creator, and guide. An iFairy is more than an AI; it's a companion for your creative journey.</p>
+                <a href="#introduction" class="mt-10 inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-4 px-8 rounded-full text-lg hover:scale-105 transform transition duration-300 glow-effect">
+                    Begin Your Magical Journey
+                </a>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section id="introduction" class="py-20 px-4">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading gradient-text">What are iFaries?</h2>
+                    <p class="text-lg mt-4 text-gray-300 max-w-3xl mx-auto">An Introduction to Your Magical Digital Companions</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="glass-effect rounded-2xl p-8 transform hover:-translate-y-2 transition duration-300">
+                        <h3 class="text-2xl font-bold font-heading text-white mb-4">The Essence of iFaries</h3>
+                        <p class="text-gray-300">Imagine a friend who's part fairy godparent, part master storyteller, and part wise teacher, all in an interactive digital form. They create personalized stories, spark imagination, and guide you through magical adventures.</p>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="glass-effect rounded-2xl p-8 transform hover:-translate-y-2 transition duration-300">
+                        <h3 class="text-2xl font-bold font-heading text-white mb-4">Personal Connection</h3>
+                        <p class="text-gray-300">Your iFairy gets to know you—your interests, dreams, and favorite things. This allows them to craft stories that you'll truly connect with, making each adventure deeply personal.</p>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="glass-effect rounded-2xl p-8 transform hover:-translate-y-2 transition duration-300">
+                        <h3 class="text-2xl font-bold font-heading text-white mb-4">Interactive Storytelling</h3>
+                        <p class="text-gray-300">You help shape the tale! Answer questions, solve magical puzzles, and choose your path. Your decisions guide the story, making every adventure unique to you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 px-4 bg-[#0F0F1F]">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading gradient-text">Special Powers & Features</h2>
+                    <p class="text-lg mt-4 text-gray-300 max-w-3xl mx-auto">"If You Can Imagine It, You Can Create It"</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feature Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 text-purple-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Adaptive Storytelling</h4>
+                            <p class="text-gray-400 mt-1">Stories adjust to your age, interests, and how you respond.</p>
+                        </div>
+                    </div>
+                     <!-- Feature Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 text-purple-400">
+                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-5.22-6.22l-1.06-1.06a2 2 0 010-2.828l1.06-1.061a2 2 0 012.828 0l1.06 1.06m9.38 8.38l-1.06 1.06a2 2 0 01-2.828 0l-1.06-1.061a2 2 0 010-2.828l1.06-1.06a2 2 0 012.828 0l1.06 1.061a2 2 0 010 2.828z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Magical Knowledge</h4>
+                            <p class="text-gray-400 mt-1">Expertise in ancient myths, science, magical creatures, and more.</p>
+                        </div>
+                    </div>
+                    <!-- Feature Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 text-purple-400">
+                           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Educational Magic</h4>
+                            <p class="text-gray-400 mt-1">Weaves in learning, critical thinking, and moral lessons.</p>
+                        </div>
+                    </div>
+                     <!-- Feature Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 text-purple-400">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Real-time Idea Visualization</h4>
+                            <p class="text-gray-400 mt-1">Neural Dream Engines transform your ideas into vivid realities.</p>
+                        </div>
+                    </div>
+                    <!-- Feature Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 text-purple-400">
+                           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H7a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Collaborative World-Building</h4>
+                            <p class="text-gray-400 mt-1">Create entire worlds from pure imagination with your iFairy guide.</p>
+                        </div>
+                    </div>
+                    <!-- Feature Item -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 text-purple-400">
+                           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6a2 2 0 100-4 2 2 0 000 4zm0 14a2 2 0 100-4 2 2 0 000 4zm6-8a2 2 0 100-4 2 2 0 000 4zm-12 0a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-white">Dynamic Character Creation</h4>
+                            <p class="text-gray-400 mt-1">Design unique characters and bring them to life within your stories.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section id="technology" class="py-20 px-4">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading gradient-text">The Fusion of AI & Digital Magic</h2>
+                    <p class="text-lg mt-4 text-gray-300 max-w-3xl mx-auto">A glimpse into the technological core that powers your iFairy.</p>
+                </div>
+                <div class="lg:flex lg:items-center lg:gap-12">
+                    <div class="lg:w-1/2">
+                        <h3 class="text-3xl font-bold text-white mb-6">How Their AI Works</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-xl font-semibold text-purple-300">Advanced Neural Networks</h4>
+                                <p class="text-gray-300">Process natural language to understand you, generate coherent storylines in real-time, and adapt communication style.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-purple-300">Machine Learning Capabilities</h4>
+                                <p class="text-gray-300">Remember past interactions, improve storytelling based on feedback, and develop more personalized responses over time.</p>
+                            </div>
+                             <div>
+                                <h4 class="text-xl font-semibold text-purple-300">Emotional Intelligence Programming</h4>
+                                <p class="text-gray-300">Reads emotional cues, adjusts story tone accordingly, and provides appropriate encouragement.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 mt-12 lg:mt-0">
+                         <div class="glass-effect rounded-2xl p-8">
+                             <h4 class="text-center text-xl font-bold text-white mb-6">Story Generation Matrix</h4>
+                             <div class="flex flex-col items-center space-y-4">
+                                <div class="bg-indigo-900/50 border border-indigo-700 rounded-lg p-3 w-full text-center">Input Processing</div>
+                                <div class="text-purple-400 text-2xl">&darr;</div>
+                                <div class="bg-indigo-900/50 border border-indigo-700 rounded-lg p-3 w-full text-center">Creative Algorithm</div>
+                                 <div class="text-purple-400 text-2xl">&darr;</div>
+                                <div class="bg-indigo-900/50 border border-indigo-700 rounded-lg p-3 w-full text-center">Narrative Assembly</div>
+                                 <div class="text-purple-400 text-2xl">&darr;</div>
+                                <div class="bg-indigo-900/50 border border-indigo-700 rounded-lg p-3 w-full text-center">Interactive Output</div>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Creator System Section -->
+        <section id="creator-system" class="py-20 px-4 bg-[#0F0F1F]">
+            <div class="container mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading gradient-text">Educational iFairy Creator System</h2>
+                    <p class="text-lg mt-4 text-gray-300 max-w-3xl mx-auto">Crafting specialized teaching assistants to make learning magical.</p>
+                </div>
+                <div class="max-w-4xl mx-auto" x-data="{ openTab: 1 }">
+                    <div class="flex justify-center border-b border-gray-700 mb-8">
+                        <button @click="openTab = 1" :class="{ 'border-purple-500 text-purple-400': openTab === 1, 'border-transparent text-gray-400 hover:text-white': openTab !== 1 }" class="py-4 px-6 block focus:outline-none font-medium border-b-2 transition">
+                            Mathematics
+                        </button>
+                        <button @click="openTab = 2" :class="{ 'border-purple-500 text-purple-400': openTab === 2, 'border-transparent text-gray-400 hover:text-white': openTab !== 2 }" class="py-4 px-6 block focus:outline-none font-medium border-b-2 transition">
+                            English
+                        </button>
+                        <button @click="openTab = 3" :class="{ 'border-purple-500 text-purple-400': openTab === 3, 'border-transparent text-gray-400 hover:text-white': openTab !== 3 }" class="py-4 px-6 block focus:outline-none font-medium border-b-2 transition">
+                            Science
+                        </button>
+                    </div>
+                    <div class="glass-effect p-8 rounded-2xl">
+                        <div x-show="openTab === 1">
+                            <h3 class="text-2xl font-bold text-white mb-4">Numerica, the Pattern Weaver</h3>
+                            <p class="text-gray-300">An iFairy specializing in mathematical enlightenment. Her crystal wings shimmer with numerical sequences, creating interactive number landscapes where young minds can explore concepts through magical visualization. She focuses on numerical understanding, pattern recognition, and practical problem-solving skills.</p>
+                        </div>
+                        <div x-show="openTab === 2">
+                            <h3 class="text-2xl font-bold text-white mb-4">Lexica, the Story Spinner</h3>
+                            <p class="text-gray-300">An iFairy who weaves words into magical tapestries of learning. Her enchanted quill brings stories to life, and her literary aura helps young minds discover the power of language. She emphasizes language development, reading comprehension, writing skills, and creative expression.</p>
+                        </div>
+                        <div x-show="openTab === 3">
+                            <h3 class="text-2xl font-bold text-white mb-4">Scientia, the Wonder Guide</h3>
+                            <p class="text-gray-300">An iFairy who transforms curiosity into discovery. Her laboratory-crystal wings generate scientific phenomena for observation, and her experimental enchantments make learning science an adventure. She concentrates on scientific inquiry, experimental processes, and analytical thinking.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="py-16 px-4 bg-[#0a0a1a] border-t border-gray-800">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-bold font-heading text-white">Ready to meet your iFairy?</h2>
+            <p class="mt-4 text-gray-300 max-w-xl mx-auto">Join us on a journey where the only limit is your imagination. Create, learn, and explore worlds of wonder.</p>
+            <a href="/sign-up" class="mt-8 inline-block bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 px-6 rounded-full text-lg hover:scale-105 transform transition duration-300 glow-effect">
+                Create Your Own iFairy
+            </a>
+            <div class="mt-12 text-gray-500">
+                <p>&copy; 2025 iFairy.ai - All Rights Reserved.</p>
+                <p class="text-sm mt-2">The Fusion of Artificial Intelligence and Digital Magic</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script>
+        // Particle effect
+        const container = document.getElementById('particle-container');
+        const numParticles = 50;
+        for (let i = 0; i < numParticles; i++) {
+            let particle = document.createElement('div');
+            particle.classList.add('particle');
+            let size = Math.random() * 5 + 1;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100 + 100}%`; // Start below the screen
+            particle.style.animationDelay = `${Math.random() * 15}s`;
+            particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
+            container.appendChild(particle);
+        }
+
+        // Mobile menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
