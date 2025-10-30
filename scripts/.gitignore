@@ -1,0 +1,11 @@
+# Ignore generated persona files (user-created)
+generated-personas/
+
+# Node modules if anyone adds dependencies
+node_modules/
+
+# System files
+.DS_Store
+*.swp
+*.swo
+*~
