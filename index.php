@@ -1,16 +1,16 @@
-<?php 
+<?php
 $use_bootstrap_icons = true;
 // Include necessary files
 require_once(__DIR__ . '/inc/includes.php');
 
-// If user is not logged in, show the simple landing page only
-if (!$isLogged) {
-    require_once(__DIR__ . '/_landing.php');
+// ADMIN-ONLY MODE: Redirect to admin panel if not logged as admin
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: /admin");
     exit;
 }
 
-define('META_TITLE', $seoConfig['home_meta_title']);
-define('META_DESCRIPTION', $seoConfig['home_meta_description']);
+define('META_TITLE', 'Developer Workspace');
+define('META_DESCRIPTION', 'Personal AI-Powered Development Environment');
 require_once(__DIR__ . '/inc/header.php');
 // Set the prompts list for logged-in users
 $getPrompts = $prompts->getListFront();
