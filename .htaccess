@@ -2,30 +2,35 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteRule ^chat/([^?]*)$ /_chat.php?slug=$1 [QSA,L]
-RewriteRule ^share/([^?]*)$ /_share.php?slug=$1 [QSA,L]
-RewriteRule ^pages/([^?]*)$ /_pages.php?slug=$1 [QSA,L]
-RewriteRule ^blog$ /_blog.php
-RewriteRule ^blog/([^?]*)$ ./_blog-post.php?slug=$1 [QSA,L]
-RewriteRule ^tag/([^?]*)$ ./_blog-tag.php?slug=$1 [QSA,L]
-RewriteRule ^ai-team$ /_ai-team.php [L]
-RewriteRule ^ai-team/([^?]*)$ ./_ai-team-category.php?slug=$1 [QSA,L]
-RewriteRule ^new-chat/([^?]*)$ ./modules/customer/_new-chat.php?slug=$1 [QSA,L]
-RewriteRule ^recharge-credits/([^?]*)$ ./modules/payment/recharge-credits/_process-payment.php?id=$1 [QSA,L]
-RewriteRule ^request-account$ ./modules/customer/_customer-request-account.php [L]
-RewriteRule ^sign-in$ ./modules/customer/_customer-sign-in.php [L]
-RewriteRule ^sign-up$ ./modules/customer/_customer-sign-up.php [L]
-RewriteRule ^pricing$ ./_pricing.php [L]
-RewriteRule ^reset-password$ ./modules/customer/_customer-reset-password.php [L]
-RewriteRule ^logout$ ./modules/customer/_customer-clear-session.php [L]
-RewriteRule ^action$ ./modules/action/_action.php [L]
-RewriteRule ^panel/view-chats/([^?]*)$ ./modules/customer/_customer-panel.php?action=get-chats&slug=$1 [QSA,L]
-RewriteRule ^panel$ ./modules/customer/_customer-panel.php?url=panel [QSA,L]
-RewriteRule ^panel/my-account$ ./modules/customer/_customer-account.php?url=my-account [L]
-RewriteRule ^panel/my-purchases$ ./modules/customer/_customer-my-purchases.php?url=my-purchases [L]
-RewriteRule ^panel/my-purchases/([^?]*)$ ./modules/customer/_customer-my-purchases-details.php?url=my-purchases&id_order=$1 [QSA,L]
-RewriteRule ^panel/checkout-complete$ ./modules/customer/_customer-checkout-complete.php?url=my-purchases [QSA,L]
-RewriteRule ^download-chat/([^?]+)/([^?]*)$ ./modules/customer/download-chat.php?ai=$1&thread=$2 [QSA,L]
-RewriteRule ^maintenance$ ./_maintenance.php [L]
-RewriteRule ^sitemap.xml$ ./_sitemap.php [L]
+# Developer Workspace Routes
+RewriteRule ^dev/ai-employee/([^?]*)$ ./modules/dev/ai-employee.php?slug=$1 [QSA,L]
+RewriteRule ^dev/code-editor$ ./modules/dev/code-editor.php [L]
+RewriteRule ^dev/ftp-manager$ ./modules/dev/ftp-manager.php [L]
+RewriteRule ^dev/projects$ ./modules/dev/projects.php [L]
+RewriteRule ^dev/projects/([^?]*)$ ./modules/dev/project-detail.php?id=$1 [QSA,L]
+
+# API Routes
+RewriteRule ^api/ai-code$ ./php/api-code.php [L]
+RewriteRule ^api/ftp$ ./php/api-ftp.php [L]
+
+# Admin redirect
+RewriteRule ^$ ./admin [L]
+
 ErrorDocument 404 /_404.php
+
+# Performance optimization
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/pdf "access plus 1 month"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
